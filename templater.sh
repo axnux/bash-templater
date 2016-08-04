@@ -139,8 +139,11 @@ for var in $vars; do
 
     # Escape slashes
     value=$(echo "$value" | sed 's/\//\\\//g');
+    var=$(echo "$var" | sed 's/\//\\\//g');
+
     replaces="-e 's/{{$var}}/${value}/g' $replaces"
 done
 
 escaped_template_path=$(echo $template | sed 's/ /\\ /g')
+
 eval sed $replaces "$escaped_template_path"
